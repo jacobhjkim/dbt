@@ -445,7 +445,7 @@ def filter_installable(
             installable.append(version)
             installable_dict[str(version)] = version_string
     sorted_installable = sorted(installable)
-    sorted_installable_original_version_string = [
-        installable_dict.get(str(version)) for version in sorted_installable
+    sorted_installable_original_versions = [
+        str(installable_dict.get(str(version))) for version in sorted_installable
     ]
-    return sorted_installable_original_version_string
+    return sorted_installable_original_versions
