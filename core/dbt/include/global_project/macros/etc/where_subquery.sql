@@ -3,10 +3,13 @@
 {%- endmacro %}
 
 {% macro default__get_where_subquery(relation) -%}
-    {%- set where = config.get('where', '') -%}
-    {%- if where -%}
-        (select * from {{ relation }} where {{ where }}) dbt_subquery
+    {% set where = config.get('where', '') %}
+    {% if where %}
+        {%- set filtered -%}
+            (select * from {{ relation }} where {{ where }}) dbt_subquery
+        {%- endset -%}
+        {% do return(filtered) %}
     {%- else -%}
-        {{ relation }}
+        {% do return(relation) %}
     {%- endif -%}
 {%- endmacro %}

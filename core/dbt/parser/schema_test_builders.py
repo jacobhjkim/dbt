@@ -434,9 +434,7 @@ class TestBuilder(Generic[Testable]):
     def build_model_str(self):
         targ = self.target
         if isinstance(self.target, UnparsedNodeUpdate):
-            identifier = self.target.name
             target_str = f"ref('{targ.name}')"
         elif isinstance(self.target, UnpatchedSourceDefinition):
-            identifier = self.target.table.name
             target_str = f"source('{targ.source.name}', '{targ.table.name}')"
         return f"{{{{ get_where_subquery({target_str}) }}}}"
